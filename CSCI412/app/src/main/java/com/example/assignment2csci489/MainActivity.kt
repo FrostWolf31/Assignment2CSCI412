@@ -25,7 +25,8 @@ class MainActivity : ComponentActivity() {
                         name = "Steven Champagne",
                         modifier = Modifier.padding(innerPadding),
                         onExplicitClick = { startExplicitActivity() },
-                        onImplicitClick = { startImplicitActivity() }
+                        onImplicitClick = { startImplicitActivity() },
+                        onImageClick = { startImageActivity() }
                     )
                 }
             }
@@ -35,6 +36,12 @@ class MainActivity : ComponentActivity() {
     // Explicit Intent
     private fun startExplicitActivity() {
         val intent = Intent(this, SecondAct::class.java)
+        startActivity(intent)
+    }
+
+    private fun startImageActivity()
+    {
+        val intent = Intent(this, CaptureImage::class.java)
         startActivity(intent)
     }
 
@@ -49,7 +56,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Greeting(
     name: String, modifier: Modifier = Modifier, onExplicitClick: () -> Unit,
-    onImplicitClick: () -> Unit
+    onImplicitClick: () -> Unit, onImageClick: () -> Unit
 ) {
     Column(
         modifier = modifier
@@ -68,6 +75,11 @@ fun Greeting(
         Button(onClick = onImplicitClick) {
             Text(text = "Start Activity Implicitly")
         }
+
+        Button(onClick = onImageClick) {
+            Text(text = "View Image Activity")
+        }
+
     }
 }
 
@@ -78,7 +90,8 @@ fun GreetingPreview() {
         Greeting(
             name = "Steven",
             onExplicitClick = {},
-            onImplicitClick = {}
+            onImplicitClick = {},
+            onImageClick = {}
         )
     }
 }
