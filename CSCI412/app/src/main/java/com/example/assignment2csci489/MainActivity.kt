@@ -16,6 +16,10 @@ import androidx.compose.ui.unit.dp
 import com.example.assignment2csci489.ui.theme.Assignment2CSCI489Theme
 
 class MainActivity : ComponentActivity() {
+
+    private val MSE412_PERMISSION = "com.example.assignment2csci489.MSE412"
+    private val REQUEST_PERMISSION_CODE = 10
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -32,6 +36,24 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+
+    private fun checkAndRequestPermission() {
+        if (ContextCompat.checkSelfPermission(this, MSE412_PERMISSION) != PackageManager.PERMISSION_GRANTED) { ActivityCompat.requestPermissions(this, arrayOf(MSE412_PERMISSION), REQUEST_PERMISSION_CODE)
+        } else {
+            startExplicitActivity()
+        }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+            if (requestCode == REQUEST_PERMISSION_CODE && grantResults.isNotEmpty() &&
+                grantResults[0] == PackageManager.PERMISSION_GRANTED
+            ) {
+                startExplicitActivity()
+            } else {
+                Toast.makeText(this, "Permission denied. Cannot open SecondAct.", Toast.LENGTH_SHORT).show()
+            }
+        }
 
     // Explicit Intent
     private fun startExplicitActivity() {

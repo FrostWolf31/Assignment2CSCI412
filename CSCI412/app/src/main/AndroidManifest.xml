@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.assignment2csci489">
 
-    <!-- Add camera permission -->
+    <permission
+        android:name="com.example.assignment2csci489.MSE412"
+        android:protectionLevel="dangerous" />
+
+    <uses-permission android:name="com.example.assignment2csci489.MSE412" />
+
+
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
@@ -36,7 +43,9 @@
         <activity
             android:name=".SecondAct"
             android:label="Second Act"
-            android:theme="@style/Theme.Assignment2CSCI489">
+            android:theme="@style/Theme.Assignment2CSCI489"
+            android:permission="com.example.assignment2csci489.MSE412"
+            android:exported="true" >
         </activity>
 
         <!-- CaptureImage activity declaration -->
